@@ -45,16 +45,25 @@ const run = () => {
 	gl.drawArrays(gl.POINTS, 0, 1);
 	gl.bindTexture(gl.TEXTURE_2D, textures[step % 2])
 
-
 	gl.useProgram(draw!)
 	gl.bindFramebuffer(gl.FRAMEBUFFER, null!);
 	gl.drawArrays(gl.POINTS, 0, 1);
 
 	step++;
 }
+
+// const start = performance.now();
+// while (performance.now() - start < 1000) {
+// 	run();
+// }
+
+// console.log(step);
+
+
 const fastRun = () => {
-	for(let i = 0; i < 100; i++){
-		run()
+	run()
+
+	for(let i = 0; i < 1; i++){
 
 	}
 

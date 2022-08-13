@@ -31,9 +31,6 @@
 // gl.bindFramebuffer(gl.FRAMEBUFFER, fb);
 
 
-// gl.uniform1f(gl.getUniformLocation(draw!, "u_flipY"), 1);
-// gl.uniform1f(gl.getUniformLocation(compute!, "u_flipY"), 1);
-
 // let step = 0;
 
 // const run = () => {
@@ -53,7 +50,25 @@
 
 import Life from "./src/life";
 const l = new Life(document.querySelector("canvas")!, 512, 512);
+l.setSize(window.innerWidth, window.innerHeight);
+l.randomize();
+l.draw();
+
+// l.step();
 window.addEventListener("resize", () => {
 	l.setSize(window.innerWidth, window.innerHeight);
-	l.step();
+	l.randomize();
+	l.draw();
 })
+
+const run = () => {
+	l.step();
+}
+
+setInterval(run, 1)
+
+const d = () => {
+	requestAnimationFrame(d);
+	l.draw();
+}
+d();

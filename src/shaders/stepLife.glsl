@@ -5,7 +5,11 @@ precision highp float;
 uniform sampler2D tex;
 
 out vec4 outColor;
- 
+
+in vec4 v_positionWithOffset;
+
+uniform vec2 u_res;
+
 vec2 dirs[8] = vec2[](
 	vec2(1, 1),  vec2(-1, 1),
 	vec2(1, -1), vec2(-1, -1),
@@ -14,9 +18,10 @@ vec2 dirs[8] = vec2[](
 ); 
 
 void main() {
-	float p = 1.0/1024.0;
+	vec2 p = 1.0 / u_res;
   	float sum = 0.0;
-	vec2 cord = gl_PointCoord * vec2(1, -1);
+
+	vec2 cord = v_positionWithOffset.xy/u_res;
 
 	for(int i = 0; i < 8; i++){
 		if(texture(tex, cord.xy + dirs[i]*p).a == 1.0) sum += 1.0;
